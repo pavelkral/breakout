@@ -10,6 +10,8 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Logger.h"
+#include <EnhancedInputComponent.h>
+#include <EnhancedInputSubsystems.h>
 
 APaddle_Controller::APaddle_Controller()
 {
@@ -22,7 +24,17 @@ void APaddle_Controller::BeginPlay()
 	FViewTargetTransitionParams Params;
 	SetViewTarget(CameraActors[0],Params);
 
+//	if (APlayerController* PlayerController = Cast<APlayerController>(GetController())
+//	{
+		//PlayerController1 = PlayerController;
 
+		//PlayerController->SetInputMode(FInputModeGameOnly());
+
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(this->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	//}
 	FString s = "start";
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
 	print("start");
@@ -35,15 +47,23 @@ void APaddle_Controller::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	EnableInput(this);
-	InputComponent->BindAxis("MoveHorizontal",this,&APaddle_Controller::MoveHorizontal);
-	InputComponent->BindAction("Launch", IE_Pressed, this, &APaddle_Controller::Launch);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent)) {
+
+		
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APaddle_Controller::MoveHorizontal);
+		EnhancedInputComponent->BindAction(LunchAction, ETriggerEvent::Triggered, this, &APaddle_Controller::Launch);
+
+	}
+
 }
-void APaddle_Controller::MoveHorizontal(float AxisValue)
+void APaddle_Controller::MoveHorizontal(const FInputActionValue& Value)
 {
 	auto MyPawn =Cast<APaddle>(GetPawn());
 	if (MyPawn)
 	{
-		MyPawn->MoveHorizontal(AxisValue);
+		FVector2D MovementVector = Value.Get<FVector2D>();
+		MyPawn->MoveHorizontal(MovementVector.X);
 	}
 }
 

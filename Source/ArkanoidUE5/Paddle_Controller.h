@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "InputActionValue.h"
 #include "Paddle_Controller.generated.h"
 
 class ABall;
@@ -13,15 +14,24 @@ class ARKANOIDUE5_API APaddle_Controller : public APlayerController
 {
 	GENERATED_BODY()
 	APaddle_Controller();
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputMappingContext* DefaultMappingContext;
 
-	UFUNCTION()
-	virtual  void SetupInputComponent() override;
+	/** Jump Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* LunchAction;
+
+	
 
 protected:
 	virtual void BeginPlay() override;
-	void MoveHorizontal(float AxisValue);
-
-
+	//void MoveHorizontal(float AxisValue);
+	virtual void MoveHorizontal(const FInputActionValue& Value);
+	
 	void Launch();
 
 	UPROPERTY(EditAnywhere)
@@ -34,6 +44,7 @@ protected:
 	FActorSpawnParameters SpawnInfo;
 
 public:
-
+	UFUNCTION()
+	virtual void SetupInputComponent() override;
 	void SpawnNewBall();
 };

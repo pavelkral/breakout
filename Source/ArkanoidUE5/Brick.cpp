@@ -68,7 +68,8 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		//Logs::printOnScreen(*BallVelocity.ToString());
 		//Logs::printOnScreen(s);
 		FTimerHandle UnusedHandle;
-		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, 0.1f, false);
+		float timeTudestroy = 0.5f;
+		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, timeTudestroy, false);
 
 
 	}

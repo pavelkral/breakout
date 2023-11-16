@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "Paddle.generated.h"
 
 class UFloatingPawnMovement;
@@ -33,6 +34,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 	virtual void MoveHorizontal(float AxisValue);
 };

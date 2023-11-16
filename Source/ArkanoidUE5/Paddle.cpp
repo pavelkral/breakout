@@ -7,6 +7,8 @@
  	
 #include "Logger.h"
 #include "Components/PrimitiveComponent.h"
+#include <EnhancedInputSubsystems.h>
+#include <EnhancedInputComponent.h>
 
 
 // Sets default values
@@ -32,6 +34,8 @@ void APaddle::BeginPlay()
 {
 	Super::BeginPlay();
 	//UE_LOG(LogTemp, Display, TEXT("Your 8message"));
+
+	
 	print("start");
 	//print_k(1,"ok");
 }
@@ -43,12 +47,6 @@ void APaddle::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void APaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
 
 void APaddle::MoveHorizontal(float AxisValue)
 {
