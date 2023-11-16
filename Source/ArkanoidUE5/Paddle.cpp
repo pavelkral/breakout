@@ -2,9 +2,7 @@
 
 
 #include "Paddle.h"
-//#include  "GameFramework/FloatingPawnMovement.h"
 #include  "Components/StaticMeshComponent.h"
- 	
 #include "Logger.h"
 #include "Components/PrimitiveComponent.h"
 #include <EnhancedInputSubsystems.h>
@@ -33,9 +31,7 @@ APaddle::APaddle()
 void APaddle::BeginPlay()
 {
 	Super::BeginPlay();
-	//UE_LOG(LogTemp, Display, TEXT("Your 8message"));
-
-	
+	//UE_LOG(LogTemp, Display, TEXT("Your 8message"));	
 	print("start");
 	//print_k(1,"ok");
 }

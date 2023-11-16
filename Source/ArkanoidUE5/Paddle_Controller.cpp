@@ -20,22 +20,16 @@ void APaddle_Controller::BeginPlay()
 {
 	Super::BeginPlay();
 	TArray<AActor*> CameraActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(),ACameraActor::StaticClass(),CameraActors);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACameraActor::StaticClass(), CameraActors);
 	FViewTargetTransitionParams Params;
-	SetViewTarget(CameraActors[0],Params);
+	SetViewTarget(CameraActors[0], Params);
 
-//	if (APlayerController* PlayerController = Cast<APlayerController>(GetController())
-//	{
-		//PlayerController1 = PlayerController;
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(this->GetLocalPlayer()))
+	{
+		Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	}
 
-		//PlayerController->SetInputMode(FInputModeGameOnly());
-
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(this->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(DefaultMappingContext, 0);
-		}
-	//}
-	FString s = "start";
+	FString s = "start game";
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
 	print("start");
 	SpawnNewBall();
@@ -46,11 +40,8 @@ void APaddle_Controller::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	EnableInput(this);
-
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent)) {
 
-		
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APaddle_Controller::MoveHorizontal);
 		EnhancedInputComponent->BindAction(LunchAction, ETriggerEvent::Triggered, this, &APaddle_Controller::Launch);
 
@@ -59,7 +50,8 @@ void APaddle_Controller::SetupInputComponent()
 }
 void APaddle_Controller::MoveHorizontal(const FInputActionValue& Value)
 {
-	auto MyPawn =Cast<APaddle>(GetPawn());
+	APaddle* MyPawn = Cast<APaddle>(GetPawn());
+
 	if (MyPawn)
 	{
 		FVector2D MovementVector = Value.Get<FVector2D>();
