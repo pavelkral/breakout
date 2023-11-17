@@ -6,17 +6,40 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
+#include "ArkanoidUE5GameModeBase.h"
+#include "utils/Logs.h"
 
 void UGameHud::NativeConstruct()
 {
+	
 }
 
 void UGameHud::setup()
 {
+	UWorld* World = GetWorld();
+
+	if (World)
+	{
+		AGameModeBase* GameMode = World->GetAuthGameMode();
+
+		if (GameMode)
+		{
+			AArkanoidUE5GameModeBase* mode = Cast<AArkanoidUE5GameModeBase>(GameMode);
+			//mode->UpdateScore();
+			//mode->OnScoreChanged.AddDynamic(this, &UGameHud::UpdateScore);
+			FString s = "delegate";
+			Logs::printOnScreen(s);
+			UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
+			//UGameplayStatics::SpawnEmitterAtLocation(World, DeathParticleSystem, Location);
+			//UGameplayStatics::PlaySoundAtLocation(GetWorld(), OverlapSound, GetActorLocation());
+
+		}
+	}
 	LivesCount->SetText(FText::AsNumber(0));
+
 }
 
-void UGameHud::UpdateScore(int32 score)
+void UGameHud::UpdateScore(const int32 score)
 {
 	PointsCount->SetText(FText::AsNumber(score));
 }

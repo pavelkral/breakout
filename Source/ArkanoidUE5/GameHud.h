@@ -24,5 +24,7 @@ protected:
 	virtual void NativeConstruct() override;
 public:
 	void setup();
+
+	UFUNCTION(BlueprintCallable)
 	void UpdateScore(int32 score);
 };

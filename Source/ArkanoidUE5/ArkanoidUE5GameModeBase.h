@@ -6,9 +6,10 @@
 #include "GameFramework/GameModeBase.h"
 #include "ArkanoidUE5GameModeBase.generated.h"
 
-/**
- * 
- */
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnScoreChanged, int32, TotalPoints);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLivesCountChanged, int32, LivesCount);
+
 UCLASS()
 class ARKANOIDUE5_API AArkanoidUE5GameModeBase : public AGameModeBase
 {
@@ -30,6 +31,9 @@ public:
 
 	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
 	class UGameHud* GameHud;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Delegates")
+	FOnScoreChanged OnScoreChanged;
 
 	UFUNCTION()
 	void UpdateScore();

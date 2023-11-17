@@ -3,22 +3,19 @@
 
 #include "Paddle.h"
 #include  "Components/StaticMeshComponent.h"
-#include "Logger.h"
 #include "Components/PrimitiveComponent.h"
 #include <EnhancedInputSubsystems.h>
 #include <EnhancedInputComponent.h>
-
-
+#include "utils/Logs.h"
 // Sets default values
 APaddle::APaddle()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	PaddleMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SM_paddle"));
-//	SM_paddle->SetupAttachment(RootComponent);
 	RootComponent = PaddleMesh;
 	PaddleMesh->SetEnableGravity(false);
-//	SM_paddle->SetConstraintMode(EDOFMode::XZPlane);
+//	PaddleMesh->SetConstraintMode(EDOFMode::XZPlane);
 	PaddleMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	PaddleMesh->SetCollisionProfileName(TEXT("PhysicsActor"));
 	

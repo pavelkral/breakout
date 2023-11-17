@@ -6,6 +6,7 @@
 
 #include "GameHud.h"
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/ArrowComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -20,6 +21,8 @@ void AArkanoidUE5GameModeBase::BeginPlay()
 
 	GameHud->setup();
 	GameHud->AddToViewport();
+
+	OnScoreChanged.AddDynamic(GameHud, &UGameHud::UpdateScore);
 	//UpdateScore();
 	
 	//GameHud->PointsCount->SetText(FText::AsNumber(0));
@@ -27,5 +30,6 @@ void AArkanoidUE5GameModeBase::BeginPlay()
 void AArkanoidUE5GameModeBase::UpdateScore()
 {
 	TotalPoints++;
-	GameHud->UpdateScore(TotalPoints);
+	//GameHud->UpdateScore(TotalPoints);
+	OnScoreChanged.Broadcast(TotalPoints);
 }

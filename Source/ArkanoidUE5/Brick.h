@@ -44,6 +44,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Assets")
 	class UParticleSystem* DeathParticleSystem;
 
+	class AArkanoidUE5GameModeBase* mode;
+
 	float SpeedModifierOnBounce = 1.01f;
 
 	UFUNCTION()

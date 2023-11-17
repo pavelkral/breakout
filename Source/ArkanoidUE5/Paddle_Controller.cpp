@@ -6,10 +6,9 @@
 #include "Paddle.h"
 #include "Camera/CameraActor.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "utils/Logs.h"
 #include "Paddle.h"
 #include "Ball.h"
-#include "Logger.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
 

@@ -29,6 +29,19 @@ void ABrick::BeginPlay()
 {
 	Super::BeginPlay();
 	Box_Collision->OnComponentBeginOverlap.AddDynamic(this, &ABrick::OnOverlapBegin);
+
+	UWorld* World = GetWorld();
+
+	if (World)
+	{
+		AGameModeBase* GameMode = World->GetAuthGameMode();
+		if (GameMode)
+		{
+			mode = Cast<AArkanoidUE5GameModeBase>(GameMode);
+	
+
+		}
+	}
 }
 
 // Called every frame
@@ -50,20 +63,9 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		FVector BallVelocity = MyBall->GetVelocity();
 		BallVelocity *= (SpeedModifierOnBounce - 1.0f);
 		MyBall->GetBall()->SetPhysicsLinearVelocity(BallVelocity, true);
-		UWorld* World = GetWorld();
-
-		if (World)
-		{
-			AGameModeBase* GameMode = World->GetAuthGameMode();
-			if (GameMode)
-			{
-				AArkanoidUE5GameModeBase * mode = Cast<AArkanoidUE5GameModeBase>(GameMode);
-				mode->UpdateScore();
-				UGameplayStatics::SpawnEmitterAtLocation(World, DeathParticleSystem, Location);
-				UGameplayStatics::PlaySoundAtLocation(GetWorld(), OverlapSound, GetActorLocation());
-
-			}
-		}
+		mode->UpdateScore();
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathParticleSystem, Location);
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), OverlapSound, GetActorLocation());
 		FString s = "cplision";
 		//Logs::printOnScreen(*BallVelocity.ToString());
 		//Logs::printOnScreen(s);
