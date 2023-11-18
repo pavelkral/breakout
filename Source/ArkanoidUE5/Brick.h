@@ -44,7 +44,23 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Assets")
 	class UParticleSystem* DeathParticleSystem;
 
+	UPROPERTY(EditAnywhere)
 	class AArkanoidUE5GameModeBase* mode;
+
+	UPROPERTY(EditAnywhere)
+	UMaterialInstanceDynamic* material;
+
+	UPROPERTY(EditAnywhere)
+	UMaterial* TestMaterial;
+
+	UPROPERTY(EditAnywhere)
+	UMaterialInstanceDynamic* MI_TestMaterial = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterialInterface* OnMaterial;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterialInterface* OffMaterial;
 
 	float SpeedModifierOnBounce = 1.01f;
 
