@@ -36,10 +36,10 @@ void ABrick::BeginPlay()
 	Super::BeginPlay();
 	Box_Collision->OnComponentBeginOverlap.AddDynamic(this, &ABrick::OnOverlapBegin);
 
-	material = (UMaterialInstanceDynamic*)SM_Brick->GetMaterial(0);
 	SM_Brick->CreateAndSetMaterialInstanceDynamic(0);
 	//SM_Brick->CreateDynamicMaterialInstance(OffMaterial, FName("MyDynMat"));
 	TestMaterial = LoadObject<UMaterial>(nullptr, TEXT("/Script/Engine.Material'/Game/Assets/Materials/b.b'"));
+
 	if (TestMaterial)
 	{
 		MI_TestMaterial = UMaterialInstanceDynamic::Create(TestMaterial, this);
@@ -48,11 +48,9 @@ void ABrick::BeginPlay()
 
 	SM_Brick->SetMaterial(0, MI_TestMaterial);
 
-	check(material);
+	//FString s = "delegate";
 
-	FString s = "delegate";
-
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *material->GetName());
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *MI_TestMaterial->GetName());
 
 	UWorld* World = GetWorld();
 
@@ -97,12 +95,15 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		float timeTudestroy = 0.5f;
 
 		//UStaticMeshComponent* sphere = this->FindComponentByClass<UStaticMeshComponent>();
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, material->GetName());
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, material->GetName());
 		//SM_Brick->SetMaterial(0, OnMaterial);
 		MI_TestMaterial->SetVectorParameterValue(FName(TEXT("Color")), FLinearColor(0.9f, 0.1f, 0.1f));
 
-		UE_LOG(LogTemp, Warning, TEXT("%s"), *material->GetName());
-	//	DrawDebugBox(GetWorld(), GetActorLocation(), FVector(100, 100, 100), FColor::White, true, -1, 0, 10);
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *MI_TestMaterial->GetName());
+
+		//DrawDebugSphere(GetWorld(), GetActorLocation(), 10, 26, FColor(181, 0, 0), true, -1, 0, 2);
+		mode->Bricks.Remove(this);
+		///DrawDebugBox(GetWorld(), GetActorLocation(), FVector(10, 10, 10), FColor::White, true, -1, 0, 10);
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, timeTudestroy, false);
 
 

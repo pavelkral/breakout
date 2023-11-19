@@ -48,9 +48,6 @@ protected:
 	class AArkanoidUE5GameModeBase* mode;
 
 	UPROPERTY(EditAnywhere)
-	UMaterialInstanceDynamic* material;
-
-	UPROPERTY(EditAnywhere)
 	UMaterial* TestMaterial;
 
 	UPROPERTY(EditAnywhere)

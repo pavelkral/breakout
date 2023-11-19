@@ -18,6 +18,7 @@ APaddle_Controller::APaddle_Controller()
 void APaddle_Controller::BeginPlay()
 {
 	Super::BeginPlay();
+
 	TArray<AActor*> CameraActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACameraActor::StaticClass(), CameraActors);
 	FViewTargetTransitionParams Params;
@@ -30,7 +31,7 @@ void APaddle_Controller::BeginPlay()
 
 	FString s = "start game";
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
-	print("start");
+	//print("start");
 	SpawnNewBall();
 	Launch();
 }

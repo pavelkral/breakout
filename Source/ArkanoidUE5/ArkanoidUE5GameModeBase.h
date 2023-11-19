@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Config")
 	TSubclassOf<UUserWidget> GameHudClass;
 
+	UPROPERTY(EditAnywhere, Category = "Config")
+	TArray<AActor*> Bricks;
+
 	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
 	class UGameHud* GameHud;
 
