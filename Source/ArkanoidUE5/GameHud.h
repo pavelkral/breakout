@@ -21,6 +21,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* LivesCount;
 
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TimerText;
+
 	virtual void NativeConstruct() override;
 public:
 	void setup();

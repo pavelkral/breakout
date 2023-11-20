@@ -67,6 +67,8 @@ protected:
 		const FHitResult& SweepResult);
 
 	void DestroyBrick();
+
+
 	
 public:	
 	// Called every frame

@@ -44,9 +44,18 @@ void APaddle_Controller::SetupInputComponent()
 
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APaddle_Controller::MoveHorizontal);
 		EnhancedInputComponent->BindAction(LunchAction, ETriggerEvent::Triggered, this, &APaddle_Controller::Launch);
-
+		EnhancedInputComponent->BindAction(QuitAction, ETriggerEvent::Triggered, this, &APaddle_Controller::QuitApp);
 	}
 
+}
+void APaddle_Controller::QuitApp()
+{
+	UWorld* World = GetWorld();
+
+	if (World)
+	{
+		UKismetSystemLibrary::ExecuteConsoleCommand(World, TEXT("quit"));
+	}
 }
 void APaddle_Controller::MoveHorizontal(const FInputActionValue& Value)
 {

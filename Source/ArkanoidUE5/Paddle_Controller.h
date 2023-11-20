@@ -25,7 +25,8 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LunchAction;
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* QuitAction;
 
 protected:
 	virtual void BeginPlay() override;
@@ -46,5 +47,6 @@ protected:
 public:
 	UFUNCTION()
 	virtual void SetupInputComponent() override;
+	void QuitApp();
 	void SpawnNewBall();
 };

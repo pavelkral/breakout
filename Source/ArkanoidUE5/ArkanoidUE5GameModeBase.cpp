@@ -45,3 +45,8 @@ void AArkanoidUE5GameModeBase::UpdateScore()
 	//GameHud->UpdateScore(TotalPoints);
 	OnScoreChanged.Broadcast(TotalPoints);
 }
+
+void AArkanoidUE5GameModeBase::RemoveBrick(AActor* brick)
+{
+	Bricks.Remove(brick);
+}

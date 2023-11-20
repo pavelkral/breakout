@@ -41,6 +41,9 @@ public:
 	UFUNCTION()
 	void UpdateScore();
 
+	UFUNCTION()
+	void RemoveBrick(AActor * brick);
+
 protected:
 	virtual void BeginPlay() override;
 };

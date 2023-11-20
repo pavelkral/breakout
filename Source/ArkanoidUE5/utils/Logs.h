@@ -7,6 +7,15 @@
 /**
  * 
  */
+template <typename ObjClass>
+static FORCEINLINE ObjClass* LoadObjFromPath(const FName& Path)
+{
+	if (Path == NAME_None) return NULL;
+	if (Path.ToString().Contains("None")) return NULL;
+	return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
+}
+
+
 class ARKANOIDUE5_API Logs
 {
 public:

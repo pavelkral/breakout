@@ -27,7 +27,25 @@ ABrick::ABrick()
 	OnMaterial = CreateDefaultSubobject<UMaterial>(TEXT("OnMaterial"));
 	OffMaterial = CreateDefaultSubobject<UMaterial>(TEXT("OffMaterial"));
 	
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BrickMesh(TEXT("/Script/Engine.StaticMesh'/Game/Assets/Meshes/SM_Brick.SM_Brick'"));
 
+	if (BrickMesh.Succeeded())
+	{
+		SM_Brick->SetStaticMesh(BrickMesh.Object);
+		SM_Brick->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
+		SM_Brick->SetWorldScale3D(FVector(1.f));
+	}
+
+	//TCHAR* SoundPath = L"/Script/Engine.SoundWave'/Game/Assets/Audio/253172__suntemple__retro-bonus-pickup-sfx.253172__suntemple__retro-bonus-pickup-sfx'";
+	//auto AmmoPickupSoundAsset = ConstructorHelpers::FObjectFinder<USoundBase>(TEXT("/Script/Engine.SoundWave'/Game/Assets/Audio/253172__suntemple__retro-bonus-pickup-sfx.253172__suntemple__retro-bonus-pickup-sfx'"));
+
+	//if (AmmoPickupSoundAsset.Object != nullptr)
+	//{
+		//OverlapSound = AmmoPickupSoundAsset.Object;
+	//}
+
+	FString Path = TEXT("/Script/Engine.SoundWave'/Game/Assets/Audio/253172__suntemple__retro-bonus-pickup-sfx.253172__suntemple__retro-bonus-pickup-sfx'");
+	OverlapSound = LoadObjFromPath<USoundBase>(FName(*Path));
 }
 
 // Called when the game starts or when spawned
@@ -36,7 +54,7 @@ void ABrick::BeginPlay()
 	Super::BeginPlay();
 	Box_Collision->OnComponentBeginOverlap.AddDynamic(this, &ABrick::OnOverlapBegin);
 
-	SM_Brick->CreateAndSetMaterialInstanceDynamic(0);
+	//SM_Brick->CreateAndSetMaterialInstanceDynamic(0);
 	//SM_Brick->CreateDynamicMaterialInstance(OffMaterial, FName("MyDynMat"));
 	TestMaterial = LoadObject<UMaterial>(nullptr, TEXT("/Script/Engine.Material'/Game/Assets/Materials/b.b'"));
 
@@ -102,7 +120,7 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *MI_TestMaterial->GetName());
 
 		//DrawDebugSphere(GetWorld(), GetActorLocation(), 10, 26, FColor(181, 0, 0), true, -1, 0, 2);
-		mode->Bricks.Remove(this);
+		mode->RemoveBrick(this);
 		///DrawDebugBox(GetWorld(), GetActorLocation(), FVector(10, 10, 10), FColor::White, true, -1, 0, 10);
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, timeTudestroy, false);
 

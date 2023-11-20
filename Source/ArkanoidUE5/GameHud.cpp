@@ -35,8 +35,8 @@ void UGameHud::setup()
 
 		}
 	}
-	LivesCount->SetText(FText::AsNumber(0));
-
+	LivesCount->SetText(FText::AsNumber(3));
+	TimerText->SetText(FText::AsNumber(60));
 }
 
 void UGameHud::UpdateScore(const int32 score)
