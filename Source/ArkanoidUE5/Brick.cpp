@@ -11,6 +11,8 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "DrawDebugHelpers.h"
+#include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 ABrick::ABrick()
@@ -45,7 +47,22 @@ ABrick::ABrick()
 	//}
 
 	FString Path = TEXT("/Script/Engine.SoundWave'/Game/Assets/Audio/253172__suntemple__retro-bonus-pickup-sfx.253172__suntemple__retro-bonus-pickup-sfx'");
-	OverlapSound = LoadObjFromPath<USoundBase>(FName(*Path));
+	OverlapSound = LoadAssetFromPath<USoundBase>(FName(*Path));
+
+//	FString  Path1 = TEXT("/Script/Engine.ParticleSystem'/Game/Assets/Particles/P_Explosion.P_Explosion''");
+//	
+//	DeathParticleSystem = LoadAssetFromPath<UParticleSystem>(FName(*Path1));
+	//PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("MyPSC"));
+//	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("/Script/Engine.ParticleSystem'/Game/Assets/Particles/P_Explosion.P_Explosion'"));
+//	DeathParticleSystem = CreateDefaultSubobject<UParticleSystem>(TEXT("MyPSC"));
+	DeathParticleSystem  = LoadObject<UParticleSystem>(nullptr, TEXT("/Script/Engine.ParticleSystem'/Game/Assets/Particles/P_Explosion.P_Explosion'"));
+	
+
+//	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("MyPSC"));
+
+//	PSC->SetTemplate(PS.Object);
+
+	//check(PCS);
 }
 
 // Called when the game starts or when spawned
@@ -108,7 +125,7 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), OverlapSound, GetActorLocation());
 		FString s = "cplision";
 		//Logs::printOnScreen(*BallVelocity.ToString());
-		//Logs::printOnScreen(s);
+		
 		FTimerHandle UnusedHandle;
 		float timeTudestroy = 0.5f;
 
@@ -117,7 +134,8 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		//SM_Brick->SetMaterial(0, OnMaterial);
 		MI_TestMaterial->SetVectorParameterValue(FName(TEXT("Color")), FLinearColor(0.9f, 0.1f, 0.1f));
 
-		UE_LOG(LogTemp, Warning, TEXT("%s"), *MI_TestMaterial->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("%s"), *MI_TestMaterial->GetName());
+		Logs::Log(MI_TestMaterial->GetName());
 
 		//DrawDebugSphere(GetWorld(), GetActorLocation(), 10, 26, FColor(181, 0, 0), true, -1, 0, 2);
 		mode->RemoveBrick(this);

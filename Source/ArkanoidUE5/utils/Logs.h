@@ -8,7 +8,7 @@
  * 
  */
 template <typename ObjClass>
-static FORCEINLINE ObjClass* LoadObjFromPath(const FName& Path)
+static FORCEINLINE ObjClass* LoadAssetFromPath(const FName& Path)
 {
 	if (Path == NAME_None) return NULL;
 	if (Path.ToString().Contains("None")) return NULL;
@@ -22,6 +22,7 @@ public:
 	Logs();
 	~Logs();
 	static void printOnScreen(const FString& DebugMessage);
+	static void Log(const FString& DebugMessage);
 };
 
 #define print(Text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::White, TEXT(Text), false) 

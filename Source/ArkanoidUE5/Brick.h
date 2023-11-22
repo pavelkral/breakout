@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "Brick.generated.h"
 
+
+
+
 USTRUCT(BlueprintType)
 struct FMyStruct2
 {
@@ -43,6 +46,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Assets")
 	class UParticleSystem* DeathParticleSystem;
+
+	//UPROPERTY(VisibleAnywhere)
+	//class UParticleSystemComponent* PSC;
 
 	UPROPERTY(EditAnywhere)
 	class AArkanoidUE5GameModeBase* mode;

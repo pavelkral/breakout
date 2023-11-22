@@ -38,8 +38,6 @@ private:
 	/// C++ default implementation (if no implementation given by Blueprint) Can be called from Blueprint using "Parent: CountdownHasFinished"
 	virtual void CountdownHasFinished_Implementation();
 
-	
-
 	FTimerHandle CountdownTimerHandle;
 
 	void UpdateTimerDisplay();
