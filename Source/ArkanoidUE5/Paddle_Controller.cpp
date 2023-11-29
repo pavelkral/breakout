@@ -54,7 +54,8 @@ void APaddle_Controller::QuitApp()
 
 	if (World)
 	{
-		UKismetSystemLibrary::ExecuteConsoleCommand(World, TEXT("quit"));
+		//UKismetSystemLibrary::ExecuteConsoleCommand(World, TEXT("quit"));
+		UGameplayStatics::OpenLevel(World, TEXT("MainMenu"));
 	}
 }
 void APaddle_Controller::MoveHorizontal(const FInputActionValue& Value)
