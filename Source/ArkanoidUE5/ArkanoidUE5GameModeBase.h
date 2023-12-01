@@ -41,6 +41,8 @@ public:
 	UFUNCTION()
 	void UpdateScore();
 
+	void UpdateFps(int32 fps);
+
 	UFUNCTION()
 	void RemoveBrick(AActor * brick);
 

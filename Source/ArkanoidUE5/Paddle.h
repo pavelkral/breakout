@@ -28,6 +28,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	UFloatingPawnMovement* FloatingMovment;
+
+	class AArkanoidUE5GameModeBase* mode;
 	
 public:	
 	// Called every frame

@@ -11,6 +11,8 @@
 #include "Ball.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
+#include "GameFramework/GameUserSettings.h"
+//#include "GameSettings.h"
 
 APaddle_Controller::APaddle_Controller()
 {
@@ -75,6 +77,43 @@ void APaddle_Controller::Launch()
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
 	print("lunch");
 	MyBall->Launch();
+
+
+
+	UGameUserSettings* GameSettings = GEngine->GetGameUserSettings();
+
+	if (GameSettings)
+	{
+
+		if (bIsEpic)
+		{
+			GameSettings->SetOverallScalabilityLevel(2);
+
+			GameSettings->ApplySettings(true);
+			GameSettings->SaveSettings();
+			bIsEpic = false;
+
+		}
+		else {
+			GameSettings->SetOverallScalabilityLevel(3);
+
+			GameSettings->ApplySettings(true);
+			GameSettings->SaveSettings();
+			bIsEpic = true;
+
+			/*GameSettings->SetTextureQuality(3);
+			GameSettings->SetShadowQuality(3);
+			GameSettings->SetAntiAliasingQuality(3);
+			GameSettings->SetScreenResolution(100);
+			GameSettings->SetVisualEffectQuality(3);*/
+
+
+		}
+
+
+
+
+	}
 }
 
 void APaddle_Controller::SpawnNewBall()

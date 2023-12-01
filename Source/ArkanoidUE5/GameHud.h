@@ -30,4 +30,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateScore(int32 score);
+	void UpdateFps(int32 fps);
 };

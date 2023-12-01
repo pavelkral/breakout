@@ -43,6 +43,7 @@ protected:
 	FVector SpawnLocation = FVector(10.0f, 0.0f, 40.0f);
 	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo;
+	bool bIsEpic = true;
 
 public:
 	UFUNCTION()

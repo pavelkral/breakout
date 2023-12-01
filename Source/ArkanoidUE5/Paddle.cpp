@@ -7,6 +7,8 @@
 #include <EnhancedInputSubsystems.h>
 #include <EnhancedInputComponent.h>
 #include "utils/Logs.h"
+#include "ArkanoidUE5GameModeBase.h"
+
 // Sets default values
 APaddle::APaddle()
 {
@@ -29,14 +31,31 @@ void APaddle::BeginPlay()
 {
 	Super::BeginPlay();
 	//UE_LOG(LogTemp, Display, TEXT("Your 8message"));	
-	print("start");
-	//print_k(1,"ok");
+	//print("start");
+	UWorld* World = GetWorld();
+
+	if (World)
+	{
+		AGameModeBase* GameMode = World->GetAuthGameMode();
+
+		if (GameMode)
+		{
+			mode = Cast<AArkanoidUE5GameModeBase>(GameMode);
+
+
+		}
+	}
+
 }
 
 // Called every frame
 void APaddle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	float FPS = 1.0f / GetWorld()->GetDeltaSeconds();
+	int32 fps1 = (int32)FPS;
+	mode->UpdateFps(fps1);
 
 }
 

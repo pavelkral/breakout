@@ -43,3 +43,8 @@ void UGameHud::UpdateScore(const int32 score)
 {
 	PointsCount->SetText(FText::AsNumber(score));
 }
+
+void UGameHud::UpdateFps(int32 fps)
+{
+	LivesCount->SetText(FText::AsNumber(fps));
+}
