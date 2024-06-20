@@ -28,6 +28,14 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* QuitAction;
 
+	/** Jump Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* SaveAction;
+
+	/** Jump Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* ChangeAction;
+
 protected:
 	virtual void BeginPlay() override;
 	//void MoveHorizontal(float AxisValue);
@@ -49,5 +57,7 @@ public:
 	UFUNCTION()
 	virtual void SetupInputComponent() override;
 	void QuitApp();
+	void SaveApp();
+	void ChangeApp();
 	void SpawnNewBall();
 };

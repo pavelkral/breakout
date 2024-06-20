@@ -8,6 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "ArkanoidUE5GameModeBase.h"
 #include "utils/Logs.h"
+#include "Components/BoxComponent.h"
 
 void UGameHud::NativeConstruct()
 {
@@ -26,10 +27,11 @@ void UGameHud::setup()
 		{
 			AArkanoidUE5GameModeBase* mode = Cast<AArkanoidUE5GameModeBase>(GameMode);
 			//mode->UpdateScore();
+			///bind UGameHud::UpdateScore
 			//mode->OnScoreChanged.AddDynamic(this, &UGameHud::UpdateScore);
-			FString s = "delegate";
-			Logs::printOnScreen(s);
-			UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
+			//FString s = "delegate";
+			//Logs::printOnScreen(s);
+			//UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
 			//UGameplayStatics::SpawnEmitterAtLocation(World, DeathParticleSystem, Location);
 			//UGameplayStatics::PlaySoundAtLocation(GetWorld(), OverlapSound, GetActorLocation());
 

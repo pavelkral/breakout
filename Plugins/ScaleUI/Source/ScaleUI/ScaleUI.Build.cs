@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class EditorUIScaleCustomization : ModuleRules
+public class ScaleUI : ModuleRules
 {
-	public EditorUIScaleCustomization(ReadOnlyTargetRules Target) : base(Target)
+	public ScaleUI(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -38,7 +38,8 @@ public class EditorUIScaleCustomization : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"DeveloperSettings"
+				"EditorStyle",
+				"UnrealEd",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
@@ -50,5 +51,19 @@ public class EditorUIScaleCustomization : ModuleRules
 				// ... add any modules that your module loads dynamically here ...
 			}
 			);
+
+		// DesktopPlatform is only available for Editor and Program targets (running on a desktop platform)
+		bool IsDesktopPlatformType = Target.Platform == UnrealBuildTool.UnrealTargetPlatform.Win64
+			|| Target.Platform == UnrealBuildTool.UnrealTargetPlatform.Mac
+			|| Target.Platform == UnrealBuildTool.UnrealTargetPlatform.Linux;
+
+		if (Target.Type == TargetType.Editor || (Target.Type == TargetType.Program && IsDesktopPlatformType))
+		{
+			PrivateDependencyModuleNames.AddRange(
+				new string[] {
+					"DesktopPlatform",
+				}
+			);
+		}
 	}
 }

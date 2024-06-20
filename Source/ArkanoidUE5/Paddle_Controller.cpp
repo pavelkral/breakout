@@ -12,6 +12,7 @@
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
 #include "GameFramework/GameUserSettings.h"
+#include "MainGameInstance.h"
 //#include "GameSettings.h"
 
 APaddle_Controller::APaddle_Controller()
@@ -22,6 +23,7 @@ void APaddle_Controller::BeginPlay()
 	Super::BeginPlay();
 
 	TArray<AActor*> CameraActors;
+
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACameraActor::StaticClass(), CameraActors);
 	FViewTargetTransitionParams Params;
 	SetViewTarget(CameraActors[0], Params);
@@ -31,8 +33,8 @@ void APaddle_Controller::BeginPlay()
 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
 	}
 
-	FString s = "start game";
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
+	///FString s = "start game";
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
 	//print("start");
 	SpawnNewBall();
 	Launch();
@@ -47,6 +49,8 @@ void APaddle_Controller::SetupInputComponent()
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APaddle_Controller::MoveHorizontal);
 		EnhancedInputComponent->BindAction(LunchAction, ETriggerEvent::Triggered, this, &APaddle_Controller::Launch);
 		EnhancedInputComponent->BindAction(QuitAction, ETriggerEvent::Triggered, this, &APaddle_Controller::QuitApp);
+		EnhancedInputComponent->BindAction(SaveAction, ETriggerEvent::Triggered, this, &APaddle_Controller::SaveApp);
+		EnhancedInputComponent->BindAction(ChangeAction, ETriggerEvent::Triggered, this, &APaddle_Controller::ChangeApp);
 	}
 
 }
@@ -59,6 +63,17 @@ void APaddle_Controller::QuitApp()
 		//UKismetSystemLibrary::ExecuteConsoleCommand(World, TEXT("quit"));
 		UGameplayStatics::OpenLevel(World, TEXT("MainMenu"));
 	}
+}
+void APaddle_Controller::SaveApp()
+{
+	print("save");
+
+	UMainGameInstance* GameInstance = Cast<UMainGameInstance>(GetGameInstance());
+	if (GameInstance)
+	{
+		GameInstance->SaveGame();
+	}	
+
 }
 void APaddle_Controller::MoveHorizontal(const FInputActionValue& Value)
 {
@@ -74,11 +89,16 @@ void APaddle_Controller::MoveHorizontal(const FInputActionValue& Value)
 void APaddle_Controller::Launch()
 {
 	FString s = "lunch";
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
-	print("lunch");
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *s);
+	///print("lunch");
 	MyBall->Launch();
 
+	
+}
 
+void APaddle_Controller::ChangeApp()
+{
+	print("change");
 
 	UGameUserSettings* GameSettings = GEngine->GetGameUserSettings();
 
@@ -114,6 +134,7 @@ void APaddle_Controller::Launch()
 
 
 	}
+
 }
 
 void APaddle_Controller::SpawnNewBall()

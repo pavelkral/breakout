@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 
-/**
- * 
- */
+DECLARE_LOG_CATEGORY_EXTERN(MDebugLog, Log, All);
+
+
 template <typename ObjClass>
 static FORCEINLINE ObjClass* LoadAssetFromPath(const FName& Path)
 {

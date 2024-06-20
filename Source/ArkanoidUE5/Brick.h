@@ -15,7 +15,7 @@ struct FMyStruct2
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
-	float MyFloat;
+	float Score = 0.0f;
 };
 
 UCLASS()
@@ -81,3 +81,4 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 };
+

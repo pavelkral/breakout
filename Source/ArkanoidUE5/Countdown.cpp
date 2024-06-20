@@ -2,6 +2,8 @@
 
 
 #include "Countdown.h"
+#include "utils/Logs.h"
+//#include "Logs.h"
 
 // Sets default values
 ACountdown::ACountdown()
@@ -24,11 +26,11 @@ void ACountdown::BeginPlay()
 
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ACountdown::AdvanceTimer, 1.0f, true);
 
-	UE_LOG(LogTemp, Log, TEXT("ACountdown::BeginPlay()"));
+	//UE_LOG(LogTemp, Log, TEXT("ACountdown::BeginPlay()"));
 
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "ACountdown::BeginPlay()");
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "ACountdown::BeginPlay()");
 	}
 }
 
@@ -63,10 +65,7 @@ void ACountdown::CountdownHasFinished_Implementation()
 	// Change to a special readout
 	CountdownText->SetText(FText::FromString(TEXT("End!")));
 
-	UE_LOG(LogTemp, Log, TEXT("ACountdown::CountdownHasFinished_Implementation()"));
+	UE_LOG(MDebugLog, Log, TEXT("ACountdown::CountdownHasFinished_Implementation()"));
 
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "ACountdown::CountdownHasFinished_Implementation()");
-	}
+	
 }

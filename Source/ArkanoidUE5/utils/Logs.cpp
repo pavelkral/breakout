@@ -2,14 +2,14 @@
 
 
 #include "Logs.h"
-
+DEFINE_LOG_CATEGORY(MDebugLog);
 
 void Logs::printOnScreen(const FString& DebugMessage)
 {
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::White, DebugMessage, false);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, DebugMessage, false);
 }
 
 void Logs::Log(const FString& DebugMessage)
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *DebugMessage);
+	UE_LOG(MDebugLog, Warning, TEXT("%s"), *DebugMessage);
 }
