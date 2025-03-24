@@ -9,7 +9,7 @@ public class ArkanoidUE5EditorTarget : TargetRules
      {
           Type = TargetType.Editor;
           DefaultBuildSettings = BuildSettingsVersion.V5;
-          IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_4;
-          ExtraModuleNames.AddRange(new string[] { "ArkanoidUE5" });
+		  IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
+          ExtraModuleNames.Add("ArkanoidUE5");
      }
 }
