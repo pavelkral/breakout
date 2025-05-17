@@ -1,0 +1,9 @@
+Version 2.19.2
+
+	#695	-	Fixed crash when restoring.
+	#693	-	Checking profiles using keyboard .
+	\
+
+Version 2.19.1
+
+	#674	-	Fixed issue when resuming from sleep and will not respond.
