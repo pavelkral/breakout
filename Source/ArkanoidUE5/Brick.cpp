@@ -130,7 +130,7 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		float timeTudestroy = 0.5f;
 
 		//UStaticMeshComponent* sphere = this->FindComponentByClass<UStaticMeshComponent>();
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, material->GetName());
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, MI_TestMaterial->GetName());
 		//SM_Brick->SetMaterial(0, OnMaterial);
 		MI_TestMaterial->SetVectorParameterValue(FName(TEXT("Color")), FLinearColor(0.9f, 0.1f, 0.1f));
 
